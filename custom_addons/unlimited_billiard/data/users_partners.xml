@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Pengguna A-01 s.d. A-04 (Bagian 2). Kata sandi sengaja tidak di-commit: set lewat Settings › Users. -->
+        <!-- Pengguna A-01 s.d. A-04 (Bagian 2). Admin butuh Contact Creation untuk mendaftarkan pelanggan (UC-13). Kata sandi sengaja tidak di-commit: set lewat Settings › Users. -->
         <record id="user_rina" model="res.users">
             <field name="name">Rina Kartika</field>
             <field name="login">rina.admin</field>
+            <field name="email">rina.admin@unlimitedbilliard.example</field>
             <field name="function">Admin shift siang</field>
             <field name="tz">Asia/Jakarta</field>
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user')])]"/>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user'), ref('base.group_partner_manager')])]"/>
         </record>
         <record id="user_dimas" model="res.users">
             <field name="name">Dimas Pratama</field>
             <field name="login">dimas.admin</field>
+            <field name="email">dimas.admin@unlimitedbilliard.example</field>
             <field name="function">Admin shift malam</field>
             <field name="tz">Asia/Jakarta</field>
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user')])]"/>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user'), ref('base.group_partner_manager')])]"/>
         </record>
         <record id="user_ujang" model="res.users">
             <field name="name">Ujang Suherman</field>
             <field name="login">ujang.kitchen</field>
+            <field name="email">ujang.kitchen@unlimitedbilliard.example</field>
             <field name="function">Kitchen shift siang</field>
             <field name="tz">Asia/Jakarta</field>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('stock.group_stock_user')])]"/>
@@ -26,6 +29,7 @@
         <record id="user_fajar" model="res.users">
             <field name="name">Fajar Nugraha</field>
             <field name="login">fajar.kitchen</field>
+            <field name="email">fajar.kitchen@unlimitedbilliard.example</field>
             <field name="function">Kitchen shift malam</field>
             <field name="tz">Asia/Jakarta</field>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('stock.group_stock_user')])]"/>
@@ -33,14 +37,16 @@
         <record id="user_bayu" model="res.users">
             <field name="name">Bayu Santoso</field>
             <field name="login">bayu.manajer</field>
+            <field name="email">bayu.manajer@unlimitedbilliard.example</field>
             <field name="function">Manajer Operasional</field>
             <field name="tz">Asia/Jakarta</field>
-            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_manager'), ref('stock.group_stock_manager'), ref('purchase.group_purchase_manager'), ref('base.group_erp_manager')])]"/>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_manager'), ref('stock.group_stock_manager'), ref('purchase.group_purchase_manager'), ref('mrp.group_mrp_manager'), ref('base.group_erp_manager')])]"/>
         </record>
         <!-- Gap: Community tidak punya peran baca-saja; menu Reporting Inventory/Purchase butuh grup Administrator. -->
         <record id="user_hendra" model="res.users">
             <field name="name">Hendra Wijaya</field>
             <field name="login">hendra.owner</field>
+            <field name="email">hendra.owner@unlimitedbilliard.example</field>
             <field name="function">Owner</field>
             <field name="tz">Asia/Jakarta</field>
             <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_manager'), ref('purchase.group_purchase_manager')])]"/>
@@ -48,6 +54,7 @@
         <record id="user_lina" model="res.users">
             <field name="name">Lina Marlina</field>
             <field name="login">lina.admin</field>
+            <field name="email">lina.admin@unlimitedbilliard.example</field>
             <field name="function">Admin (kontrak berakhir)</field>
             <field name="tz">Asia/Jakarta</field>
             <field name="active" eval="False"/>
