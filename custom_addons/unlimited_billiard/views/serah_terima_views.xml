@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="ub_serah_terima_shift_view_tree" model="ir.ui.view">
+        <field name="name">ub.serah.terima.shift.tree</field>
+        <field name="model">ub.serah.terima.shift</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="waktu"/>
+                <field name="penyerah_id"/>
+                <field name="penerima_id"/>
+                <field name="status" widget="badge"
+                       decoration-warning="status == 'menunggu_konfirmasi'"
+                       decoration-success="status == 'terkonfirmasi'"
+                       decoration-danger="status == 'keberatan'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="ub_serah_terima_shift_view_form" model="ir.ui.view">
+        <field name="name">ub.serah.terima.shift.form</field>
+        <field name="model">ub.serah.terima.shift</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_bandingkan_stok" type="object" string="Bandingkan Stok"
+                            invisible="status != 'menunggu_konfirmasi' or not id"/>
+                    <button name="action_konfirmasi" type="object" string="Konfirmasi" class="btn-primary"
+                            invisible="status != 'menunggu_konfirmasi' or not id"/>
+                    <button name="action_catat_keberatan" type="object" string="Catat Keberatan"
+                            invisible="status != 'menunggu_konfirmasi' or not id"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="display_name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="waktu"/>
+                            <field name="penyerah_id"/>
+                            <field name="penerima_id" readonly="status != 'menunggu_konfirmasi'"
+                                   options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="catatan" readonly="status != 'menunggu_konfirmasi'"/>
+                            <field name="keberatan" readonly="status != 'menunggu_konfirmasi'"/>
+                        </group>
+                    </group>
+                    <field name="detail_ids" readonly="status != 'menunggu_konfirmasi'">
+                        <tree editable="bottom" create="0" delete="0"
+                              decoration-danger="is_berbeda">
+                            <field name="bahan_id" readonly="1"/>
+                            <field name="stok_sistem"/>
+                            <field name="hitung_cepat"/>
+                            <field name="uom_id"/>
+                            <field name="kondisi"/>
+                            <field name="is_berbeda"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="ub_serah_terima_shift_view_search" model="ir.ui.view">
+        <field name="name">ub.serah.terima.shift.search</field>
+        <field name="model">ub.serah.terima.shift</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="penyerah_id"/>
+                <field name="penerima_id"/>
+                <filter name="filter_menunggu" string="Menunggu Konfirmasi"
+                        domain="[('status', '=', 'menunggu_konfirmasi')]"/>
+                <filter name="filter_untuk_saya" string="Untuk Saya"
+                        domain="[('penerima_id', '=', uid)]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_status" string="Status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="ub_serah_terima_shift_action" model="ir.actions.act_window">
+        <field name="name">Serah Terima Shift</field>
+        <field name="res_model">ub.serah.terima.shift</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Catat serah terima shift Kitchen</p>
+            <p>Bahan bertag Bahan Kritis terisi otomatis beserta stok sistemnya.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ub_serah_terima_shift" name="Serah Terima Shift"
+              parent="stock.menu_stock_adjustments" action="ub_serah_terima_shift_action"
+              groups="stock.group_stock_user" sequence="20"/>
+</odoo>

@@ -17,6 +17,8 @@
     "application": True,
     # Urutan penting: perusahaan + akun dulu (POS butuh chart of accounts), lalu data induk.
     "data": [
+        "security/ir.model.access.csv",
+        "views/serah_terima_views.xml",
         "data/company.xml",
         "data/master_data.xml",
         "data/pos_data.xml",
