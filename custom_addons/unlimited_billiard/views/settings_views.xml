@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Tanpa noupdate: ikut diterapkan ulang saat modul di-upgrade. Record milik data noupdate
-     (base.group_user) diubah lewat <function> karena <record> dilewati saat upgrade. -->
+     (base.group_user, printer_kitchen) diubah lewat <function> karena <record> dilewati saat upgrade. -->
 <odoo>
     <!-- Satuan kg/g/L/ml tampil di produk, BoM, dan stok (Settings › Units of Measure). -->
     <function model="res.groups" name="write"
@@ -10,4 +10,44 @@
     <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
         <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
     </record>
+
+    <!-- Printer Kitchen diarahkan ke Odoo sendiri (controllers/kitchen_ticket.py).
+         Harus sama dengan alamat yang dibuka di browser; ubah bila ODOO_PORT bukan 8069. -->
+    <function model="pos.printer" name="write"
+              eval="[[ref('printer_kitchen')], {'proxy_ip': 'localhost:8069'}]"/>
+
+    <!-- L-10: daftar tiket Kitchen hasil "cetak" POS -->
+    <record id="tiket_kitchen_view_kanban" model="ir.ui.view">
+        <field name="name">ir.attachment.kanban.tiket.kitchen</field>
+        <field name="model">ir.attachment</field>
+        <field name="priority">99</field>
+        <field name="arch" type="xml">
+            <kanban create="0">
+                <field name="id"/>
+                <field name="create_date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="fw-bold mb-2"><field name="create_date"/></div>
+                            <img t-att-src="'/web/image/' + record.id.raw_value" alt="Tiket Kitchen" style="max-width: 100%;"/>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    <record id="tiket_kitchen_action" model="ir.actions.act_window">
+        <field name="name">Tiket Kitchen</field>
+        <field name="res_model">ir.attachment</field>
+        <field name="view_mode">kanban</field>
+        <field name="view_id" ref="tiket_kitchen_view_kanban"/>
+        <field name="domain">[('res_model', '=', 'pos.printer')]</field>
+        <field name="context">{'create': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Belum ada tiket Kitchen</p>
+            <p>Tiket muncul di sini setiap Admin menekan Order di layar pesanan POS.</p>
+        </field>
+    </record>
+    <menuitem id="menu_tiket_kitchen" name="Tiket Kitchen" parent="point_of_sale.menu_point_of_sale"
+              action="tiket_kitchen_action" groups="point_of_sale.group_pos_user" sequence="50"/>
 </odoo>
