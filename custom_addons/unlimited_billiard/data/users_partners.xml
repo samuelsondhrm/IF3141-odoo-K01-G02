@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Pengguna A-01 s.d. A-04 (Bagian 2). Kata sandi sengaja tidak di-commit: set lewat Settings › Users. -->
+        <record id="user_rina" model="res.users">
+            <field name="name">Rina Kartika</field>
+            <field name="login">rina.admin</field>
+            <field name="function">Admin shift siang</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user')])]"/>
+        </record>
+        <record id="user_dimas" model="res.users">
+            <field name="name">Dimas Pratama</field>
+            <field name="login">dimas.admin</field>
+            <field name="function">Admin shift malam</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_user'), ref('purchase.group_purchase_user')])]"/>
+        </record>
+        <record id="user_ujang" model="res.users">
+            <field name="name">Ujang Suherman</field>
+            <field name="login">ujang.kitchen</field>
+            <field name="function">Kitchen shift siang</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('stock.group_stock_user')])]"/>
+        </record>
+        <record id="user_fajar" model="res.users">
+            <field name="name">Fajar Nugraha</field>
+            <field name="login">fajar.kitchen</field>
+            <field name="function">Kitchen shift malam</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('stock.group_stock_user')])]"/>
+        </record>
+        <record id="user_bayu" model="res.users">
+            <field name="name">Bayu Santoso</field>
+            <field name="login">bayu.manajer</field>
+            <field name="function">Manajer Operasional</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_manager'), ref('stock.group_stock_manager'), ref('purchase.group_purchase_manager'), ref('base.group_erp_manager')])]"/>
+        </record>
+        <!-- Gap: Community tidak punya peran baca-saja; menu Reporting Inventory/Purchase butuh grup Administrator. -->
+        <record id="user_hendra" model="res.users">
+            <field name="name">Hendra Wijaya</field>
+            <field name="login">hendra.owner</field>
+            <field name="function">Owner</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user'), ref('point_of_sale.group_pos_user'), ref('stock.group_stock_manager'), ref('purchase.group_purchase_manager')])]"/>
+        </record>
+        <record id="user_lina" model="res.users">
+            <field name="name">Lina Marlina</field>
+            <field name="login">lina.admin</field>
+            <field name="function">Admin (kontrak berakhir)</field>
+            <field name="tz">Asia/Jakarta</field>
+            <field name="active" eval="False"/>
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+
+        <!-- Pelanggan dan member (Bagian 9). Masa berlaku dan persetujuan di catatan internal (workaround FR-12). -->
+        <record id="tag_member_aktif" model="res.partner.category">
+            <field name="name">Member Aktif</field>
+            <field name="color">10</field>
+        </record>
+        <record id="tag_member_kedaluwarsa" model="res.partner.category">
+            <field name="name">Member Kedaluwarsa</field>
+            <field name="color">1</field>
+        </record>
+        <record id="pelanggan_andi" model="res.partner">
+            <field name="name">Andi Saputra</field>
+            <field name="phone">0812-1111-2001</field>
+            <field name="category_id" eval="[(6, 0, [ref('tag_member_aktif')])]"/>
+            <field name="property_product_pricelist" ref="pricelist_member"/>
+            <field name="comment"><![CDATA[<p>Member: 2 Nov 2026 – 2 Des 2026</p><p>Persetujuan data: Ya · Persetujuan promosi: Ya</p>]]></field>
+        </record>
+        <record id="pelanggan_sinta" model="res.partner">
+            <field name="name">Sinta Maharani</field>
+            <field name="phone">0812-1111-2002</field>
+            <field name="category_id" eval="[(6, 0, [ref('tag_member_kedaluwarsa')])]"/>
+            <field name="property_product_pricelist" ref="pricelist_reguler"/>
+            <field name="comment"><![CDATA[<p>Member: 15 Sep 2026 – 15 Okt 2026 (kedaluwarsa)</p><p>Persetujuan data: Ya · Persetujuan promosi: Tidak</p>]]></field>
+        </record>
+        <record id="pelanggan_rizky" model="res.partner">
+            <field name="name">Rizky Ramadhan</field>
+            <field name="phone">0812-1111-2003</field>
+            <field name="property_product_pricelist" ref="pricelist_reguler"/>
+            <field name="comment"><![CDATA[<p>Persetujuan data: Ya · Persetujuan promosi: Ya</p>]]></field>
+        </record>
+        <record id="pelanggan_umum" model="res.partner">
+            <field name="name">Pelanggan Umum</field>
+            <field name="property_product_pricelist" ref="pricelist_reguler"/>
+        </record>
+
+        <record id="kartu_andi" model="loyalty.card">
+            <field name="program_id" ref="loyalty_poin_unlimited"/>
+            <field name="partner_id" ref="pelanggan_andi"/>
+            <field name="points">12</field>
+        </record>
+        <record id="kartu_sinta" model="loyalty.card">
+            <field name="program_id" ref="loyalty_poin_unlimited"/>
+            <field name="partner_id" ref="pelanggan_sinta"/>
+            <field name="points">30</field>
+        </record>
+        <record id="kartu_rizky" model="loyalty.card">
+            <field name="program_id" ref="loyalty_poin_unlimited"/>
+            <field name="partner_id" ref="pelanggan_rizky"/>
+            <field name="points">5</field>
+        </record>
+    </data>
+</odoo>
