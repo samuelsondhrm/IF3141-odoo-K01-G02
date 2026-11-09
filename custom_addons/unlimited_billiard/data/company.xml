@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="base.IDR" model="res.currency">
+            <field name="active" eval="True"/>
+        </record>
+
+        <record id="base.main_company" model="res.company">
+            <field name="name">Unlimited Billiard &amp; Cafe</field>
+            <field name="street">Jl. Tubagus Ismail No. 27</field>
+            <field name="city">Bandung</field>
+            <field name="country_id" ref="base.id"/>
+            <!-- FR-07: PO di atas Rp100.000 butuh persetujuan Manajer. -->
+            <field name="po_double_validation">two_step</field>
+            <field name="po_double_validation_amount">100000</field>
+        </record>
+
+        <record id="base.user_admin" model="res.users">
+            <field name="tz">Asia/Jakarta</field>
+        </record>
+
+        <!-- POS butuh chart of accounts. Chart Indonesia dipakai karena negara fiskalnya
+             menetapkan mata uang IDR (chart generik mengembalikan ke USD). Dimuat di sini, bukan menunggu
+             hook akhir instalasi Odoo, agar jurnal dan metode bayar di pos_data.xml tidak terhapus.
+             Argumen pertama [] = ids karena try_loading bukan @api.model. -->
+        <function model="account.chart.template" name="try_loading"
+                  eval="[[], 'id', ref('base.main_company'), False]"/>
+
+        <!-- Harga di data dummy sudah final (tanpa pajak), jadi pajak default chart dimatikan. -->
+        <record id="base.main_company" model="res.company">
+            <field name="account_sale_tax_id" eval="False"/>
+            <field name="account_purchase_tax_id" eval="False"/>
+        </record>
+    </data>
+</odoo>
