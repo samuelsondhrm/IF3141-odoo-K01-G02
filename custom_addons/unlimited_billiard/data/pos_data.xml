@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Metode bayar FR-09: tunai, EDC, QRIS -->
+        <record id="journal_tunai" model="account.journal">
+            <field name="name">Tunai</field>
+            <field name="type">cash</field>
+            <field name="code">TUNAI</field>
+        </record>
+        <record id="journal_edc" model="account.journal">
+            <field name="name">EDC</field>
+            <field name="type">bank</field>
+            <field name="code">EDC</field>
+        </record>
+        <record id="journal_qris" model="account.journal">
+            <field name="name">QRIS</field>
+            <field name="type">bank</field>
+            <field name="code">QRIS</field>
+        </record>
+        <record id="pm_tunai" model="pos.payment.method">
+            <field name="name">Tunai</field>
+            <field name="journal_id" ref="journal_tunai"/>
+        </record>
+        <record id="pm_edc" model="pos.payment.method">
+            <field name="name">EDC</field>
+            <field name="journal_id" ref="journal_edc"/>
+        </record>
+        <record id="pm_qris" model="pos.payment.method">
+            <field name="name">QRIS</field>
+            <field name="journal_id" ref="journal_qris"/>
+        </record>
+
+        <!-- Pricelist USD bawaan (dibuat sebelum mata uang perusahaan diganti IDR) tidak dipakai. -->
+        <function model="product.pricelist" name="write">
+            <value model="product.pricelist" search="[('currency_id.name', '!=', 'IDR')]"/>
+            <value eval="{'active': False}"/>
+        </function>
+
+        <!-- Pricelist (Bagian 8). Reguler menjadi default (sequence 1). -->
+        <record id="pricelist_reguler" model="product.pricelist">
+            <field name="name">Reguler</field>
+            <field name="currency_id" ref="base.IDR"/>
+            <field name="sequence">1</field>
+            <field name="item_ids" eval="[(0, 0, {'applied_on': '1_product', 'product_tmpl_id': ref('sewa_meja_product_template'), 'compute_price': 'fixed', 'fixed_price': 37000})]"/>
+        </record>
+        <record id="pricelist_early_time" model="product.pricelist">
+            <field name="name">Early Time</field>
+            <field name="currency_id" ref="base.IDR"/>
+            <field name="sequence">2</field>
+            <field name="item_ids" eval="[(0, 0, {'applied_on': '1_product', 'product_tmpl_id': ref('sewa_meja_product_template'), 'compute_price': 'fixed', 'fixed_price': 22000})]"/>
+        </record>
+        <record id="pricelist_member" model="product.pricelist">
+            <field name="name">Member</field>
+            <field name="currency_id" ref="base.IDR"/>
+            <field name="sequence">3</field>
+            <field name="item_ids" eval="[(0, 0, {'applied_on': '1_product', 'product_tmpl_id': ref('sewa_meja_product_template'), 'compute_price': 'fixed', 'fixed_price': 0})]"/>
+        </record>
+        <record id="pricelist_member_malam" model="product.pricelist">
+            <field name="name">Member Malam</field>
+            <field name="currency_id" ref="base.IDR"/>
+            <field name="sequence">4</field>
+            <field name="item_ids" eval="[(0, 0, {'applied_on': '1_product', 'product_tmpl_id': ref('sewa_meja_product_template'), 'compute_price': 'percentage', 'percent_price': 20})]"/>
+        </record>
+
+        <!-- Denah Area Biliar: Meja 01-10 (4 kursi) + Kasir untuk transaksi tanpa meja (Bagian 7) -->
+        <record id="floor_area_biliar" model="restaurant.floor">
+            <field name="name">Area Biliar</field>
+        </record>
+        <record id="meja_01" model="restaurant.table">
+            <field name="name">Meja 01</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">60</field><field name="position_v">60</field>
+        </record>
+        <record id="meja_02" model="restaurant.table">
+            <field name="name">Meja 02</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">240</field><field name="position_v">60</field>
+        </record>
+        <record id="meja_03" model="restaurant.table">
+            <field name="name">Meja 03</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">420</field><field name="position_v">60</field>
+        </record>
+        <record id="meja_04" model="restaurant.table">
+            <field name="name">Meja 04</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">600</field><field name="position_v">60</field>
+        </record>
+        <record id="meja_05" model="restaurant.table">
+            <field name="name">Meja 05</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">780</field><field name="position_v">60</field>
+        </record>
+        <record id="meja_06" model="restaurant.table">
+            <field name="name">Meja 06</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">60</field><field name="position_v">210</field>
+        </record>
+        <record id="meja_07" model="restaurant.table">
+            <field name="name">Meja 07</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">240</field><field name="position_v">210</field>
+        </record>
+        <record id="meja_08" model="restaurant.table">
+            <field name="name">Meja 08</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">420</field><field name="position_v">210</field>
+        </record>
+        <record id="meja_09" model="restaurant.table">
+            <field name="name">Meja 09</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">600</field><field name="position_v">210</field>
+        </record>
+        <record id="meja_10" model="restaurant.table">
+            <field name="name">Meja 10</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">4</field><field name="width">140</field><field name="height">90</field>
+            <field name="position_h">780</field><field name="position_v">210</field>
+        </record>
+        <record id="meja_kasir" model="restaurant.table">
+            <field name="name">Kasir</field><field name="floor_id" ref="floor_area_biliar"/>
+            <field name="seats">1</field><field name="shape">round</field>
+            <field name="width">90</field><field name="height">90</field>
+            <field name="position_h">60</field><field name="position_v">360</field>
+        </record>
+
+        <!-- Printer Kitchen: proxy_ip diatur di views/settings_views.xml (tiket disimpan sebagai gambar, L-10). -->
+        <record id="printer_kitchen" model="pos.printer">
+            <field name="name">Printer Kitchen</field>
+            <field name="product_categories_ids" eval="[(6, 0, [ref('pos_categ_makanan_berat'), ref('pos_categ_cemilan'), ref('pos_categ_minuman_racik')])]"/>
+        </record>
+
+        <record id="pos_config_kasir_admin" model="pos.config">
+            <field name="name">Kasir Admin</field>
+            <field name="module_pos_restaurant" eval="True"/>
+            <field name="floor_ids" eval="[(6, 0, [ref('floor_area_biliar')])]"/>
+            <field name="iface_orderline_notes" eval="True"/>
+            <field name="iface_printbill" eval="True"/>
+            <field name="use_pricelist" eval="True"/>
+            <field name="pricelist_id" ref="pricelist_reguler"/>
+            <field name="available_pricelist_ids" eval="[(6, 0, [ref('pricelist_reguler'), ref('pricelist_early_time'), ref('pricelist_member'), ref('pricelist_member_malam')])]"/>
+            <field name="payment_method_ids" eval="[(6, 0, [ref('pm_tunai'), ref('pm_edc'), ref('pm_qris')])]"/>
+            <field name="is_order_printer" eval="True"/>
+            <field name="printer_ids" eval="[(6, 0, [ref('printer_kitchen')])]"/>
+        </record>
+
+        <!-- Config bawaan (Shop dari chart of accounts, Restaurant/Bar dari pos_restaurant) tidak dipakai. -->
+        <function model="pos.config" name="write">
+            <value model="pos.config" search="[('name', 'in', ['Shop', 'Restaurant', 'Bar'])]"/>
+            <value eval="{'active': False}"/>
+        </function>
+
+        <!-- Poin Unlimited: 1 poin per Rp10.000 Sewa Meja + F&B (bukan Parkir/Keanggotaan); 50 poin = 1 Es Teh Manis -->
+        <record id="loyalty_poin_unlimited" model="loyalty.program">
+            <field name="name">Poin Unlimited</field>
+            <field name="program_type">loyalty</field>
+            <field name="applies_on">both</field>
+            <field name="trigger">auto</field>
+            <field name="portal_visible" eval="True"/>
+            <field name="portal_point_name">Poin</field>
+            <field name="pos_ok" eval="True"/>
+            <field name="pos_config_ids" eval="[(6, 0, [ref('pos_config_kasir_admin')])]"/>
+            <field name="rule_ids" eval="[(0, 0, {'reward_point_mode': 'money', 'reward_point_amount': 0.0001, 'minimum_qty': 0, 'product_ids': [(6, 0, [ref('sewa_meja'), ref('m01'), ref('m02'), ref('m03'), ref('m04'), ref('m05'), ref('m06'), ref('m07'), ref('m08'), ref('m09'), ref('m10'), ref('m11'), ref('m12')])]})]"/>
+            <field name="reward_ids" eval="[(0, 0, {'reward_type': 'product', 'reward_product_id': ref('m09'), 'reward_product_qty': 1, 'required_points': 50})]"/>
+        </record>
+    </data>
+</odoo>
