@@ -16,6 +16,36 @@
     <function model="pos.printer" name="write"
               eval="[[ref('printer_kitchen')], {'proxy_ip': 'localhost:8069'}]"/>
 
+    <!-- pos_self_order (auto-install) menyalakan QR ordering untuk config restoran; tidak dipakai. -->
+    <function model="pos.config" name="write"
+              eval="[[ref('pos_config_kasir_admin')], {'self_ordering_mode': 'nothing'}]"/>
+
+    <!-- Produk contoh modul loyalty (Gift Card, Top-up eWallet) bukan menu Unlimited Billiard. -->
+    <function model="product.product" name="write"
+              eval="[[ref('loyalty.gift_card_product_50'), ref('loyalty.ewallet_product_50')], {'available_in_pos': False}]"/>
+
+    <!-- Poin Unlimited memberi 0,0001 poin per Rp; 2 desimal bawaan menampilkannya sebagai 0.00. -->
+    <record id="loyalty_rule_view_form_digits" model="ir.ui.view">
+        <field name="name">loyalty.rule.form.digits</field>
+        <field name="model">loyalty.rule</field>
+        <field name="inherit_id" ref="loyalty.loyalty_rule_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='reward_point_amount']" position="attributes">
+                <attribute name="digits">[16, 4]</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="loyalty_rule_view_kanban_digits" model="ir.ui.view">
+        <field name="name">loyalty.rule.kanban.digits</field>
+        <field name="model">loyalty.rule</field>
+        <field name="inherit_id" ref="loyalty.loyalty_rule_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//p//field[@name='reward_point_amount']" position="attributes">
+                <attribute name="digits">[16, 4]</attribute>
+            </xpath>
+        </field>
+    </record>
+
     <!-- L-10: daftar tiket Kitchen hasil "cetak" POS -->
     <record id="tiket_kitchen_view_kanban" model="ir.ui.view">
         <field name="name">ir.attachment.kanban.tiket.kitchen</field>
