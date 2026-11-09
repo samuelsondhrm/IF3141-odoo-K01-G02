@@ -12,6 +12,9 @@
         <record id="tag_bahan_kritis" model="product.tag">
             <field name="name">Bahan Kritis</field>
         </record>
+        <record id="stock.warehouse0" model="stock.warehouse">
+            <field name="name">Unlimited Billiard</field>
+        </record>
         <record id="stock.stock_location_stock" model="stock.location">
             <field name="name">Kitchen</field>
         </record>
