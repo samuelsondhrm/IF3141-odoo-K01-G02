@@ -23,5 +23,6 @@
         "data/master_data.xml",
         "data/pos_data.xml",
         "data/users_partners.xml",
+        "views/settings_views.xml",
     ],
 }
