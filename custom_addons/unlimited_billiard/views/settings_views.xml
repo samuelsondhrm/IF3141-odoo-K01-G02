@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tanpa noupdate: ikut diterapkan ulang saat modul di-upgrade. Record milik data noupdate
+     (base.group_user) diubah lewat <function> karena <record> dilewati saat upgrade. -->
+<odoo>
+    <!-- Satuan kg/g/L/ml tampil di produk, BoM, dan stok (Settings › Units of Measure). -->
+    <function model="res.groups" name="write"
+              eval="[[ref('base.group_user')], {'implied_ids': [(4, ref('uom.group_uom'))]}]"/>
+
+    <!-- UC-18: Admin dan Kitchen (Inventory User) ikut memantau Replenishment. -->
+    <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+    </record>
+</odoo>

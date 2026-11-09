@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ub_serah_terima_user,ub.serah.terima.shift user,model_ub_serah_terima_shift,stock.group_stock_user,1,1,1,0
 access_ub_serah_terima_manager,ub.serah.terima.shift manager,model_ub_serah_terima_shift,stock.group_stock_manager,1,1,1,1
 access_ub_detail_serah_terima_user,ub.detail.serah.terima user,model_ub_detail_serah_terima,stock.group_stock_user,1,1,1,1
+access_ub_orderpoint_stock_user,stock.warehouse.orderpoint stock user (UC-18),stock.model_stock_warehouse_orderpoint,stock.group_stock_user,1,1,1,1
