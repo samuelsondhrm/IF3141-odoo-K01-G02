@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dibangkitkan dari 'M4 Data Dummy Odoo' Bagian 3-7. Ubah di sumber datanya, bukan di sini saja. -->
+<odoo>
+    <data noupdate="1">
+        <record id="uom_ml" model="uom.uom">
+            <field name="name">ml</field>
+            <field name="category_id" ref="uom.product_uom_categ_vol"/>
+            <field name="uom_type">smaller</field>
+            <field name="factor" eval="1000"/>
+            <field name="rounding" eval="1"/>
+        </record>
+        <record id="tag_bahan_kritis" model="product.tag">
+            <field name="name">Bahan Kritis</field>
+        </record>
+        <record id="stock.stock_location_stock" model="stock.location">
+            <field name="name">Kitchen</field>
+        </record>
+        <record id="pos_categ_makanan_berat" model="pos.category">
+            <field name="name">Makanan Berat</field>
+            <field name="sequence" eval="1"/>
+        </record>
+        <record id="pos_categ_cemilan" model="pos.category">
+            <field name="name">Cemilan</field>
+            <field name="sequence" eval="2"/>
+        </record>
+        <record id="pos_categ_minuman_racik" model="pos.category">
+            <field name="name">Minuman Racik</field>
+            <field name="sequence" eval="3"/>
+        </record>
+        <record id="pos_categ_minuman_kemasan" model="pos.category">
+            <field name="name">Minuman Kemasan</field>
+            <field name="sequence" eval="4"/>
+        </record>
+        <record id="pos_categ_sewa_meja" model="pos.category">
+            <field name="name">Sewa Meja</field>
+            <field name="sequence" eval="5"/>
+        </record>
+        <record id="pos_categ_parkir" model="pos.category">
+            <field name="name">Parkir</field>
+            <field name="sequence" eval="6"/>
+        </record>
+        <record id="pos_categ_keanggotaan" model="pos.category">
+            <field name="name">Keanggotaan</field>
+            <field name="sequence" eval="7"/>
+        </record>
+        <record id="s01" model="res.partner">
+            <field name="name">Toko Sembako Berkah Jaya</field>
+            <field name="is_company" eval="True"/>
+            <field name="phone">0812-1111-0001</field>
+            <field name="supplier_rank" eval="1"/>
+        </record>
+        <record id="s02" model="res.partner">
+            <field name="name">CV Segar Abadi</field>
+            <field name="is_company" eval="True"/>
+            <field name="phone">0812-1111-0002</field>
+            <field name="supplier_rank" eval="1"/>
+        </record>
+        <record id="s03" model="res.partner">
+            <field name="name">Roastery Kopi Dago</field>
+            <field name="is_company" eval="True"/>
+            <field name="phone">0812-1111-0003</field>
+            <field name="supplier_rank" eval="1"/>
+        </record>
+        <record id="s04" model="res.partner">
+            <field name="name">Toko Susu dan Minuman Sejahtera</field>
+            <field name="is_company" eval="True"/>
+            <field name="phone">0812-1111-0004</field>
+            <field name="supplier_rank" eval="1"/>
+        </record>
+        <record id="s05" model="res.partner">
+            <field name="name">Kios Buah Pak Asep</field>
+            <field name="is_company" eval="True"/>
+            <field name="phone">0812-1111-0005</field>
+            <field name="supplier_rank" eval="1"/>
+        </record>
+        <!-- Bahan baku (Bagian 4) -->
+        <record id="b01" model="product.product">
+            <field name="name">Beras</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price" eval="14000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b02" model="product.product">
+            <field name="name">Mie telur kering</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="3500"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b03" model="product.product">
+            <field name="name">Telur ayam</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="2200"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b04" model="product.product">
+            <field name="name">Ayam fillet</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price" eval="48000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b05" model="product.product">
+            <field name="name">Kentang beku</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price" eval="32000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b06" model="product.product">
+            <field name="name">Pisang kepok</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="1500"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b07" model="product.product">
+            <field name="name">Roti tawar</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="1000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b08" model="product.product">
+            <field name="name">Keju cheddar</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="120"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b09" model="product.product">
+            <field name="name">Meses cokelat</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="60"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b10" model="product.product">
+            <field name="name">Minyak goreng</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_litre"/>
+            <field name="uom_po_id" ref="uom.product_uom_litre"/>
+            <field name="standard_price" eval="18000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b11" model="product.product">
+            <field name="name">Kopi bubuk espresso blend</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="220"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b12" model="product.product">
+            <field name="name">Susu UHT full cream</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom_ml"/>
+            <field name="uom_po_id" ref="uom_ml"/>
+            <field name="standard_price" eval="20"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+            <field name="product_tag_ids" eval="[(4, ref('tag_bahan_kritis'))]"/>
+        </record>
+        <record id="b13" model="product.product">
+            <field name="name">Gula aren cair</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom_ml"/>
+            <field name="uom_po_id" ref="uom_ml"/>
+            <field name="standard_price" eval="40"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b14" model="product.product">
+            <field name="name">Teh celup</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="400"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b15" model="product.product">
+            <field name="name">Gula pasir</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price" eval="17000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b16" model="product.product">
+            <field name="name">Jeruk peras</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="standard_price" eval="2000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b17" model="product.product">
+            <field name="name">Es batu</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="uom_po_id" ref="uom.product_uom_kgm"/>
+            <field name="standard_price" eval="3000"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b18" model="product.product">
+            <field name="name">Bumbu nasi goreng</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="50"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b19" model="product.product">
+            <field name="name">Sambal geprek</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="40"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <record id="b20" model="product.product">
+            <field name="name">Tepung bumbu</field>
+            <field name="detailed_type">product</field>
+            <field name="uom_id" ref="uom.product_uom_gram"/>
+            <field name="uom_po_id" ref="uom.product_uom_gram"/>
+            <field name="standard_price" eval="30"/>
+            <field name="list_price" eval="0"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="sale_ok" eval="False"/>
+        </record>
+        <!-- Menu racikan Kitchen dan minuman kemasan (Bagian 3) -->
+        <record id="m01" model="product.product">
+            <field name="name">Nasi Goreng Unlimited</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="28000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_makanan_berat')])]"/>
+        </record>
+        <record id="m02" model="product.product">
+            <field name="name">Mie Goreng Telur</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="22000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_makanan_berat')])]"/>
+        </record>
+        <record id="m03" model="product.product">
+            <field name="name">Nasi Ayam Geprek</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="25000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_makanan_berat')])]"/>
+        </record>
+        <record id="m04" model="product.product">
+            <field name="name">Kentang Goreng</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="18000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_cemilan')])]"/>
+        </record>
+        <record id="m05" model="product.product">
+            <field name="name">Pisang Goreng Keju</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="17000"/>
+            <field name="available_in_pos" eval="False"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_cemilan')])]"/>
+        </record>
+        <record id="m06" model="product.product">
+            <field name="name">Roti Bakar Cokelat Keju</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="18000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_cemilan')])]"/>
+        </record>
+        <record id="m07" model="product.product">
+            <field name="name">Kopi Susu Gula Aren</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="20000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_racik')])]"/>
+        </record>
+        <record id="m08" model="product.product">
+            <field name="name">Americano</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="18000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_racik')])]"/>
+        </record>
+        <record id="m09" model="product.product">
+            <field name="name">Es Teh Manis</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="8000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_racik')])]"/>
+        </record>
+        <record id="m10" model="product.product">
+            <field name="name">Es Jeruk</field>
+            <field name="detailed_type">consu</field>
+            <field name="list_price" eval="12000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_racik')])]"/>
+        </record>
+        <record id="m11" model="product.product">
+            <field name="name">Air Mineral 600 ml</field>
+            <field name="detailed_type">product</field>
+            <field name="list_price" eval="6000"/>
+            <field name="standard_price" eval="3000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_kemasan')])]"/>
+        </record>
+        <record id="m12" model="product.product">
+            <field name="name">Teh Botol 450 ml</field>
+            <field name="detailed_type">product</field>
+            <field name="list_price" eval="8000"/>
+            <field name="standard_price" eval="5000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_minuman_kemasan')])]"/>
+        </record>
+        <!-- Produk layanan (Bagian 7) -->
+        <record id="sewa_meja" model="product.product">
+            <field name="name">Sewa Meja (per jam)</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_hour"/>
+            <field name="uom_po_id" ref="uom.product_uom_hour"/>
+            <field name="list_price" eval="37000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_sewa_meja')])]"/>
+        </record>
+        <record id="parkir_motor" model="product.product">
+            <field name="name">Parkir Motor</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="list_price" eval="3000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_parkir')])]"/>
+        </record>
+        <record id="parkir_mobil" model="product.product">
+            <field name="name">Parkir Mobil</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="list_price" eval="6000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_parkir')])]"/>
+        </record>
+        <record id="keanggotaan" model="product.product">
+            <field name="name">Keanggotaan 1 Bulan</field>
+            <field name="detailed_type">service</field>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="uom_po_id" ref="uom.product_uom_unit"/>
+            <field name="list_price" eval="375000"/>
+            <field name="available_in_pos" eval="True"/>
+            <field name="pos_categ_ids" eval="[(6, 0, [ref('pos_categ_keanggotaan')])]"/>
+        </record>
+        <!-- Harga beli acuan per pemasok (Bagian 6) -->
+        <record id="seller_b01" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b01_product_template"/>
+            <field name="price" eval="14000"/>
+        </record>
+        <record id="seller_b02" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b02_product_template"/>
+            <field name="price" eval="3500"/>
+        </record>
+        <record id="seller_b03" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b03_product_template"/>
+            <field name="price" eval="2200"/>
+        </record>
+        <record id="seller_b04" model="product.supplierinfo">
+            <field name="partner_id" ref="s02"/>
+            <field name="product_tmpl_id" ref="b04_product_template"/>
+            <field name="price" eval="48000"/>
+        </record>
+        <record id="seller_b05" model="product.supplierinfo">
+            <field name="partner_id" ref="s02"/>
+            <field name="product_tmpl_id" ref="b05_product_template"/>
+            <field name="price" eval="32000"/>
+        </record>
+        <record id="seller_b06" model="product.supplierinfo">
+            <field name="partner_id" ref="s05"/>
+            <field name="product_tmpl_id" ref="b06_product_template"/>
+            <field name="price" eval="1500"/>
+        </record>
+        <record id="seller_b07" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b07_product_template"/>
+            <field name="price" eval="1000"/>
+        </record>
+        <record id="seller_b08" model="product.supplierinfo">
+            <field name="partner_id" ref="s02"/>
+            <field name="product_tmpl_id" ref="b08_product_template"/>
+            <field name="price" eval="120"/>
+        </record>
+        <record id="seller_b09" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b09_product_template"/>
+            <field name="price" eval="60"/>
+        </record>
+        <record id="seller_b10" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b10_product_template"/>
+            <field name="price" eval="18000"/>
+        </record>
+        <record id="seller_b11" model="product.supplierinfo">
+            <field name="partner_id" ref="s03"/>
+            <field name="product_tmpl_id" ref="b11_product_template"/>
+            <field name="price" eval="220"/>
+        </record>
+        <record id="seller_b12" model="product.supplierinfo">
+            <field name="partner_id" ref="s04"/>
+            <field name="product_tmpl_id" ref="b12_product_template"/>
+            <field name="price" eval="20"/>
+        </record>
+        <record id="seller_b13" model="product.supplierinfo">
+            <field name="partner_id" ref="s03"/>
+            <field name="product_tmpl_id" ref="b13_product_template"/>
+            <field name="price" eval="40"/>
+        </record>
+        <record id="seller_b14" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b14_product_template"/>
+            <field name="price" eval="400"/>
+        </record>
+        <record id="seller_b15" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b15_product_template"/>
+            <field name="price" eval="17000"/>
+        </record>
+        <record id="seller_b16" model="product.supplierinfo">
+            <field name="partner_id" ref="s05"/>
+            <field name="product_tmpl_id" ref="b16_product_template"/>
+            <field name="price" eval="2000"/>
+        </record>
+        <record id="seller_b17" model="product.supplierinfo">
+            <field name="partner_id" ref="s05"/>
+            <field name="product_tmpl_id" ref="b17_product_template"/>
+            <field name="price" eval="3000"/>
+        </record>
+        <record id="seller_b18" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b18_product_template"/>
+            <field name="price" eval="50"/>
+        </record>
+        <record id="seller_b19" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b19_product_template"/>
+            <field name="price" eval="40"/>
+        </record>
+        <record id="seller_b20" model="product.supplierinfo">
+            <field name="partner_id" ref="s01"/>
+            <field name="product_tmpl_id" ref="b20_product_template"/>
+            <field name="price" eval="30"/>
+        </record>
+        <record id="seller_m11" model="product.supplierinfo">
+            <field name="partner_id" ref="s04"/>
+            <field name="product_tmpl_id" ref="m11_product_template"/>
+            <field name="price" eval="3000"/>
+        </record>
+        <record id="seller_m12" model="product.supplierinfo">
+            <field name="partner_id" ref="s04"/>
+            <field name="product_tmpl_id" ref="m12_product_template"/>
+            <field name="price" eval="5000"/>
+        </record>
+        <!-- Resep: BoM tipe kit, 1 porsi (Bagian 5) -->
+        <record id="bom_m01" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m01_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b01'), 'product_qty': 0.15, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b03'), 'product_qty': 1, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b10'), 'product_qty': 0.02, 'product_uom_id': ref('uom.product_uom_litre')}), (0, 0, {'product_id': ref('b18'), 'product_qty': 20, 'product_uom_id': ref('uom.product_uom_gram')})]"/>
+        </record>
+        <record id="bom_m02" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m02_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b02'), 'product_qty': 1, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b03'), 'product_qty': 1, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b10'), 'product_qty': 0.02, 'product_uom_id': ref('uom.product_uom_litre')}), (0, 0, {'product_id': ref('b18'), 'product_qty': 10, 'product_uom_id': ref('uom.product_uom_gram')})]"/>
+        </record>
+        <record id="bom_m03" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m03_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b01'), 'product_qty': 0.15, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b04'), 'product_qty': 0.1, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b20'), 'product_qty': 40, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b19'), 'product_qty': 30, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b10'), 'product_qty': 0.05, 'product_uom_id': ref('uom.product_uom_litre')})]"/>
+        </record>
+        <record id="bom_m04" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m04_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b05'), 'product_qty': 0.15, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b10'), 'product_qty': 0.05, 'product_uom_id': ref('uom.product_uom_litre')})]"/>
+        </record>
+        <record id="bom_m05" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m05_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b06'), 'product_qty': 2, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b20'), 'product_qty': 30, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b08'), 'product_qty': 20, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b10'), 'product_qty': 0.05, 'product_uom_id': ref('uom.product_uom_litre')})]"/>
+        </record>
+        <record id="bom_m06" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m06_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b07'), 'product_qty': 2, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b09'), 'product_qty': 20, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b08'), 'product_qty': 20, 'product_uom_id': ref('uom.product_uom_gram')})]"/>
+        </record>
+        <record id="bom_m07" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m07_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b11'), 'product_qty': 18, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b12'), 'product_qty': 150, 'product_uom_id': ref('uom_ml')}), (0, 0, {'product_id': ref('b13'), 'product_qty': 20, 'product_uom_id': ref('uom_ml')}), (0, 0, {'product_id': ref('b17'), 'product_qty': 0.1, 'product_uom_id': ref('uom.product_uom_kgm')})]"/>
+        </record>
+        <record id="bom_m08" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m08_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b11'), 'product_qty': 18, 'product_uom_id': ref('uom.product_uom_gram')}), (0, 0, {'product_id': ref('b17'), 'product_qty': 0.1, 'product_uom_id': ref('uom.product_uom_kgm')})]"/>
+        </record>
+        <record id="bom_m09" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m09_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b14'), 'product_qty': 1, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b15'), 'product_qty': 0.02, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b17'), 'product_qty': 0.15, 'product_uom_id': ref('uom.product_uom_kgm')})]"/>
+        </record>
+        <record id="bom_m10" model="mrp.bom">
+            <field name="product_tmpl_id" ref="m10_product_template"/>
+            <field name="type">phantom</field>
+            <field name="product_qty" eval="1"/>
+            <field name="bom_line_ids" eval="[(0, 0, {'product_id': ref('b16'), 'product_qty': 2, 'product_uom_id': ref('uom.product_uom_unit')}), (0, 0, {'product_id': ref('b15'), 'product_qty': 0.015, 'product_uom_id': ref('uom.product_uom_kgm')}), (0, 0, {'product_id': ref('b17'), 'product_qty': 0.15, 'product_uom_id': ref('uom.product_uom_kgm')})]"/>
+        </record>
+        <!-- Stok min/max. Trigger manual agar scheduler tidak membuat RFQ sendiri (PO dibuat Admin, UC-19). -->
+        <record id="orderpoint_b01" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b01"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="5"/>
+            <field name="product_max_qty" eval="25"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b02" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b02"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="10"/>
+            <field name="product_max_qty" eval="50"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b03" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b03"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="20"/>
+            <field name="product_max_qty" eval="90"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b04" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b04"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="2"/>
+            <field name="product_max_qty" eval="8"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b05" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b05"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="3"/>
+            <field name="product_max_qty" eval="10"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b06" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b06"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="10"/>
+            <field name="product_max_qty" eval="40"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b07" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b07"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="12"/>
+            <field name="product_max_qty" eval="60"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b08" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b08"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="300"/>
+            <field name="product_max_qty" eval="2000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b09" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b09"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="250"/>
+            <field name="product_max_qty" eval="1500"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b10" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b10"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="3"/>
+            <field name="product_max_qty" eval="15"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b11" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b11"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="500"/>
+            <field name="product_max_qty" eval="3000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b12" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b12"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="2000"/>
+            <field name="product_max_qty" eval="8000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b13" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b13"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="500"/>
+            <field name="product_max_qty" eval="3000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b14" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b14"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="30"/>
+            <field name="product_max_qty" eval="150"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b15" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b15"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="2"/>
+            <field name="product_max_qty" eval="8"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b16" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b16"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="10"/>
+            <field name="product_max_qty" eval="40"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b17" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b17"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="5"/>
+            <field name="product_max_qty" eval="30"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b18" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b18"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="250"/>
+            <field name="product_max_qty" eval="1500"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b19" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b19"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="400"/>
+            <field name="product_max_qty" eval="2000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_b20" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="b20"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="500"/>
+            <field name="product_max_qty" eval="3000"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_m11" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="m11"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="24"/>
+            <field name="product_max_qty" eval="0"/>
+            <field name="trigger">manual</field>
+        </record>
+        <record id="orderpoint_m12" model="stock.warehouse.orderpoint">
+            <field name="product_id" ref="m12"/>
+            <field name="warehouse_id" ref="stock.warehouse0"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+            <field name="product_min_qty" eval="12"/>
+            <field name="product_max_qty" eval="0"/>
+            <field name="trigger">manual</field>
+        </record>
+        <!-- Stok awal lewat penyesuaian inventaris agar tercatat sebagai mutasi stok -->
+        <record id="quant_b01" model="stock.quant">
+            <field name="product_id" ref="b01"/>
+            <field name="inventory_quantity" eval="20"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b02" model="stock.quant">
+            <field name="product_id" ref="b02"/>
+            <field name="inventory_quantity" eval="40"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b03" model="stock.quant">
+            <field name="product_id" ref="b03"/>
+            <field name="inventory_quantity" eval="60"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b04" model="stock.quant">
+            <field name="product_id" ref="b04"/>
+            <field name="inventory_quantity" eval="6"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b05" model="stock.quant">
+            <field name="product_id" ref="b05"/>
+            <field name="inventory_quantity" eval="2.5"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b06" model="stock.quant">
+            <field name="product_id" ref="b06"/>
+            <field name="inventory_quantity" eval="30"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b07" model="stock.quant">
+            <field name="product_id" ref="b07"/>
+            <field name="inventory_quantity" eval="40"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b08" model="stock.quant">
+            <field name="product_id" ref="b08"/>
+            <field name="inventory_quantity" eval="1000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b09" model="stock.quant">
+            <field name="product_id" ref="b09"/>
+            <field name="inventory_quantity" eval="1000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b10" model="stock.quant">
+            <field name="product_id" ref="b10"/>
+            <field name="inventory_quantity" eval="10"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b11" model="stock.quant">
+            <field name="product_id" ref="b11"/>
+            <field name="inventory_quantity" eval="2000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b12" model="stock.quant">
+            <field name="product_id" ref="b12"/>
+            <field name="inventory_quantity" eval="1800"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b13" model="stock.quant">
+            <field name="product_id" ref="b13"/>
+            <field name="inventory_quantity" eval="2000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b14" model="stock.quant">
+            <field name="product_id" ref="b14"/>
+            <field name="inventory_quantity" eval="100"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b15" model="stock.quant">
+            <field name="product_id" ref="b15"/>
+            <field name="inventory_quantity" eval="5"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b16" model="stock.quant">
+            <field name="product_id" ref="b16"/>
+            <field name="inventory_quantity" eval="30"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b17" model="stock.quant">
+            <field name="product_id" ref="b17"/>
+            <field name="inventory_quantity" eval="20"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b18" model="stock.quant">
+            <field name="product_id" ref="b18"/>
+            <field name="inventory_quantity" eval="1000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b19" model="stock.quant">
+            <field name="product_id" ref="b19"/>
+            <field name="inventory_quantity" eval="1500"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_b20" model="stock.quant">
+            <field name="product_id" ref="b20"/>
+            <field name="inventory_quantity" eval="2000"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_m11" model="stock.quant">
+            <field name="product_id" ref="m11"/>
+            <field name="inventory_quantity" eval="48"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <record id="quant_m12" model="stock.quant">
+            <field name="product_id" ref="m12"/>
+            <field name="inventory_quantity" eval="24"/>
+            <field name="location_id" model="stock.location" eval="obj().env.ref('stock.warehouse0').lot_stock_id.id"/>
+        </record>
+        <function model="stock.quant" name="action_apply_inventory">
+            <function eval="[[('id', 'in', [ref('quant_b01'), ref('quant_b02'), ref('quant_b03'), ref('quant_b04'), ref('quant_b05'), ref('quant_b06'), ref('quant_b07'), ref('quant_b08'), ref('quant_b09'), ref('quant_b10'), ref('quant_b11'), ref('quant_b12'), ref('quant_b13'), ref('quant_b14'), ref('quant_b15'), ref('quant_b16'), ref('quant_b17'), ref('quant_b18'), ref('quant_b19'), ref('quant_b20'), ref('quant_m11'), ref('quant_m12')])]]" model="stock.quant" name="search"/>
+        </function>
+    </data>
+</odoo>
