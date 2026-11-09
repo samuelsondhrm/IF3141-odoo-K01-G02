@@ -19,5 +19,6 @@
     "data": [
         "data/company.xml",
         "data/master_data.xml",
+        "data/pos_data.xml",
     ],
 }
